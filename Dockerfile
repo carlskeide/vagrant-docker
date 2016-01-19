@@ -1,5 +1,7 @@
 FROM phusion/baseimage:latest
 
+MAINTAINER Carl Skeide "carl@skeide.se"
+
 # System
 ENV VAGRANT_HOME "/home/vagrant"
 ENV VAGRANT_USER "vagrant"
