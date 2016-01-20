@@ -27,7 +27,11 @@ RUN curl -o /usr/bin/gosu -fsSL "https://github.com/tianon/gosu/releases/downloa
 
 # User
 ADD skel /etc/skel
-RUN useradd -md ${VAGRANT_HOME} -s /bin/bash ${VAGRANT_USER} &&\
+RUN useradd \
+        -md ${VAGRANT_HOME} \
+        -G docker_env \
+        -s /bin/bash \
+        ${VAGRANT_USER} &&\
     echo "${VAGRANT_USER}:${VAGRANT_PASS}" | chpasswd
 
 # SSH
