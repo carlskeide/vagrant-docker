@@ -14,7 +14,7 @@ RUN apt-get -qq update &&\
         git-core nano vim curl wget \
         python-dev python-setuptools gcc make \
         libffi-dev libssl-dev libxml2-dev libxslt-dev libicu-dev libjpeg-dev \
-        libmemcached-dev libmysqlclient-dev \
+        libmemcached-dev libmysqlclient-dev postgresql-server-dev-all \
         ruby ruby-dev &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
