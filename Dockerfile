@@ -12,8 +12,10 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get -qq update &&\
     apt-get -qq install -y --no-install-recommends \
         git-core nano vim curl wget \
-        python-dev python-setuptools gcc \
-        libffi-dev libssl-dev &&\
+        python-dev python-setuptools gcc make \
+        libffi-dev libssl-dev libxml2-dev libxslt-dev libicu-dev libjpeg-dev \
+        libmemcached-dev libmysqlclient-dev \
+        ruby ruby-dev &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
