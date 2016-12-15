@@ -3,7 +3,6 @@ FROM phusion/baseimage:latest
 MAINTAINER Carl Skeide "carl@skeide.se"
 
 # System
-ENV VAGRANT_HOME "/home/vagrant"
 ENV VAGRANT_USER "vagrant"
 ENV VAGRANT_PASS "vagrant"
 ENV DEBIAN_FRONTEND noninteractive
@@ -11,7 +10,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Packages
 RUN apt-get -qq update &&\
     apt-get -qq install -y --no-install-recommends \
-        git-core nano vim curl wget &&\
+        make gcc git-core nano vim curl wget ssh-client &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -21,7 +20,7 @@ RUN curl -o /usr/bin/gosu -fsSL "https://github.com/tianon/gosu/releases/downloa
 # User
 ADD skel /etc/skel
 RUN useradd \
-        -md ${VAGRANT_HOME} \
+        -md "/home/vagrant" \
         -G docker_env,sudo \
         -s /bin/bash \
         ${VAGRANT_USER} &&\
@@ -31,3 +30,7 @@ RUN useradd \
 RUN echo "linux" > /etc/container_environment/TERM &&\
     rm -f /etc/service/sshd/down &&\
     /etc/my_init.d/00_regen_ssh_host_keys.sh
+
+# Convenience
+VOLUME /vagrant
+WORKDIR /vagrant
