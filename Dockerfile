@@ -10,7 +10,8 @@ ENV DEBIAN_FRONTEND noninteractive
 # Packages
 RUN apt-get -qq update &&\
     apt-get -qq install -y --no-install-recommends \
-        make gcc git-core nano vim curl wget ssh-client &&\
+        make gcc git-core ssh-client \
+        screen tmux nano vim curl wget &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
