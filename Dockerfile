@@ -3,7 +3,6 @@ FROM phusion/baseimage:latest
 MAINTAINER Carl Skeide "carl@skeide.se"
 
 # System
-ENV VAGRANT_HOME "/home/vagrant"
 ENV VAGRANT_USER "vagrant"
 ENV VAGRANT_PASS "vagrant"
 ENV DEBIAN_FRONTEND noninteractive
@@ -11,11 +10,11 @@ ENV DEBIAN_FRONTEND noninteractive
 # Packages
 RUN apt-get -qq update &&\
     apt-get -qq install -y --no-install-recommends \
-        git-core nano vim curl wget \
-        python-dev python-setuptools gcc make \
+        make gcc git-core ssh-client rsync \
+        python-dev python-setuptools \
         libffi-dev libssl-dev libxml2-dev libxslt-dev libicu-dev libjpeg-dev \
         libmemcached-dev libmysqlclient-dev postgresql-server-dev-all \
-        ruby ruby-dev &&\
+        screen tmux nano vim curl wget bash-completion &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -30,7 +29,7 @@ RUN curl -o /usr/bin/gosu -fsSL "https://github.com/tianon/gosu/releases/downloa
 # User
 ADD skel /etc/skel
 RUN useradd \
-        -md ${VAGRANT_HOME} \
+        -md "/home/vagrant" \
         -G docker_env,sudo \
         -s /bin/bash \
         ${VAGRANT_USER} &&\
@@ -40,3 +39,7 @@ RUN useradd \
 RUN echo "linux" > /etc/container_environment/TERM &&\
     rm -f /etc/service/sshd/down &&\
     /etc/my_init.d/00_regen_ssh_host_keys.sh
+
+# Convenience
+VOLUME /vagrant
+WORKDIR /vagrant
