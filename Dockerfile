@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get -qq update &&\
     apt-get -qq install -y --no-install-recommends \
         make gcc git-core ssh-client rsync \
-        screen tmux nano vim curl wget &&\
+        screen tmux nano vim curl wget bash-completion &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
