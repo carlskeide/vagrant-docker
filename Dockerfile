@@ -21,7 +21,7 @@ RUN apt-get -qq update &&\
 RUN easy_install pip &&\
     pip install --quiet --upgrade --no-cache-dir \
         pyopenssl ndg-httpsclient pyasn1 \
-        virtualenv &&
+        virtualenv &&\
     virtualenv --no-site-packages /srv/venv &&\
     /srv/venv/bin/pip install --quiet --upgrade --no-cache-dir \
         pip setuptools
