@@ -14,9 +14,6 @@ RUN apt-get -qq update &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN curl -o /usr/bin/gosu -fsSL "https://github.com/tianon/gosu/releases/download/1.7/gosu-$(dpkg --print-architecture)" &&\
-    chmod +x /usr/bin/gosu
-
 # User
 ADD skel /etc/skel
 RUN useradd \
