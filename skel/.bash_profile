@@ -5,4 +5,5 @@
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 # Always switch to the vagrantdir first
+[[ -d "/srv/venv" ]] && source "/srv/venv/bin/activate"
 cd /vagrant
